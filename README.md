@@ -34,3 +34,16 @@ You can change it from docker-composer.yml
 ```bash
 bin/shell
 ```
+
+## SSL
+
+Must be run command from webserver dir and must include all app .
+They use one cert for example
+```
+mkcert -cert-file ./docker_files/cert -key-file ./docker_files/cert-key portainer.localhost traefik.localhost 
+```
+and then you add all app address app1.localhost app2.localhost 
+
+```
+mkcert -cert-file ./docker_files/cert -key-file ./docker_files/cert-key portainer.localhost traefik.localhost  app1.localhost app2.localhost
+```
