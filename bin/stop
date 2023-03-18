@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+docker compose stop
+echo "All containers were stopped: Yes."
