@@ -1,48 +1,50 @@
-# Docker Environment Local for Laravel 8 and PHP8.0 apache
+# Docker Project Container with PHP 8+ and Apache
 
 [![CircleCI](https://circleci.com/gh/adrian-gheorghe/docker-setup.svg?style=svg)](https://circleci.com/gh/adrian-gheorghe/docker-setup)
 
 ## Dockerfile 
 
-All php extension and configs
+This file containes all the php extension and configurations.
 
-## Project container commands 
+## Project Container Commands 
 
-Build container commands
+**Build container commands:**
+
 ```bash
 bin/build
 ```
 
-Start all container commands
+**Start all container commands:**
+
 ```bash
 bin/start
 ```
 
-Stop all container commands
+**Stop all container commands:**
+
 ```bash
 bin/stop
 ```
 
-## Project folder location
+## Project Folder Location
 
-Laravel project must be in src folder by default. 
-You can change it from docker-composer.yml
+Laravel project must be in `src` folder by default. You can change it from `docker-composer.yml` file.
 
-
-## To enter in project container
+## Enter In Project Container
 
 ```bash
 bin/shell
 ```
 
-## SSL
+## Registering The SSL Certificates
 
-Must be run command from webserver dir and must include all app .
-They use one cert for example
+You must to run command from `WebServer` directory and must include all the apps, because they use one certificate.
+
 ```
 mkcert -cert-file ./docker_files/cert -key-file ./docker_files/cert-key portainer.localhost traefik.localhost 
 ```
-and then you add all app address app1.localhost app2.localhost 
+
+Then you need to add all the apps addresses `app1.localhost`, `app2.localhost`, etc.
 
 ```
 mkcert -cert-file ./docker_files/cert -key-file ./docker_files/cert-key portainer.localhost traefik.localhost  app1.localhost app2.localhost
