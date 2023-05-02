@@ -1,7 +1,7 @@
+ARG LINUX_USER=your_linux_username
+
 FROM php:8.0-apache
-
 USER root
-
 WORKDIR /var/www/html
 
 RUN apt update && apt install -y \
@@ -47,19 +47,16 @@ COPY /apache/default.conf /etc/apache2/sites-available/000-default.conf
 RUN npm install -g npm@latest
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get install -y nodejs
-
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN groupadd --force -g 1000 ${LINUX_USER}
+RUN useradd -ms /bin/bash --no-user-group -g 1000 -u 1000 ${LINUX_USER}
+RUN chown -R ${LINUX_USER}:${LINUX_USER} /var/www/html && a2enmod rewrite
 
-RUN groupadd --force -g 1000 sstoyanov
-RUN useradd -ms /bin/bash --no-user-group -g 1000 -u 1000 sstoyanov
-
-RUN chown -R sstoyanov:sstoyanov /var/www/html && a2enmod rewrite
-
-
-# terminal colors with xterm
+# Terminal colors with xterm
 ENV TERM xterm
-# set the zsh theme
+
+# Set the zsh theme
 ENV ZSH_THEME agnoster
 
-# run the installation script
+# Run the installation script
 RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
